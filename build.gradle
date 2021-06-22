@@ -1,0 +1,52 @@
+plugins {
+	id 'org.springframework.boot' version '2.5.1'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+}
+apply plugin: 'java'
+apply plugin: 'io.spring.dependency-management'
+apply plugin: 'war'
+
+
+group = 'com.demo3'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies{
+	compileOnly 'org.projectlombok:lombok:1.18.20'
+	annotationProcessor 'org.projectlombok:lombok:1.18.20'
+
+
+
+	// This dependency is used internally, and not exposed to consumers on their own compile classpath.
+	implementation 'com.google.guava:guava:28.2-jre'
+
+	// Use JUnit test framework
+	testImplementation 'junit:junit:4.12'
+	compileOnly 'org.projectlombok:lombok:1.18.20'
+	annotationProcessor 'org.projectlombok:lombok:1.18.20'
+	implementation group: 'javax.validation', name: 'validation-api', version: '2.0.0.Final'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation "org.mapstruct:mapstruct:1.4.2.Final"
+	annotationProcessor "org.mapstruct:mapstruct-processor:1.4.2.Final"
+	runtimeOnly 'org.postgresql:postgresql'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	implementation group: 'org.modelmapper', name: 'modelmapper', version: '2.4.4'
+	implementation 'com.google.guava:guava:28.2-jre'
+	testImplementation 'junit:junit:4.12'
+	implementation('org.springframework.boot:spring-boot-starter-web')
+	providedRuntime('org.springframework.boot:spring-boot-starter-tomcat')
+	testImplementation group: 'junit', name: 'junit', version: '4.12'
+
+}
+
+
+
+
+test {
+	useJUnitPlatform()
+}
