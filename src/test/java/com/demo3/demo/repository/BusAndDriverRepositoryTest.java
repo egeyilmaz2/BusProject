@@ -28,8 +28,9 @@ public class BusAndDriverRepositoryTest {
         Bus bus = new Bus();
         Driver driver = new Driver();
         BusAndDriver busAndDriver = new BusAndDriver(bus,driver);
-        assertNotNull(busAndDriver);
-        busAndDriverRepository.save(busAndDriver);
+        BusAndDriver testBusAndDriver=busAndDriverRepository.save(busAndDriver);
+        assertNotNull(testBusAndDriver);
+
     }
     @Test
     public void testGetByIdBusAndDriver(){

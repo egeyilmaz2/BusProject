@@ -12,10 +12,14 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit4.SpringRunner;
 
+
+import javax.transaction.Transactional;
 import java.util.List;
 
+import static org.assertj.core.util.Arrays.asList;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
@@ -23,12 +27,13 @@ import static org.junit.Assert.assertNotNull;
 class BusRepositoryTest {
     @Autowired
     BusRepository busRepository;
+
     @Test
     public void testBusInsert() throws Exception{
         Bus bus = new Bus();
         bus.setNo("1000");
-        assertNotNull(bus);
-        busRepository.save(bus);
+        Bus testSavedBus= busRepository.save(bus);
+        assertEquals(testSavedBus.getNo(),bus.getNo());
     }
 
     @Test
@@ -36,7 +41,6 @@ class BusRepositoryTest {
         Bus bus = new Bus();
         bus.setNo("1000");
         busRepository.save(bus);
-        assertNotNull(bus);
         Bus getBusTest = busRepository.getById(bus.getId());
         assertNotNull(getBusTest);
     }
@@ -47,9 +51,7 @@ class BusRepositoryTest {
         bus1.setNo("1000");
         Bus bus2 = new Bus();
         bus1.setNo("1000");
-        assertNotNull(bus1);
         busRepository.save(bus1);
-        assertNotNull(bus2);
         busRepository.save(bus2);
         List<Bus> busList = busRepository.findAll();
         assertNotNull(busList);
