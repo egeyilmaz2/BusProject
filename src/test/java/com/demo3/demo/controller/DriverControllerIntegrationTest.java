@@ -32,7 +32,6 @@ public class DriverControllerIntegrationTest {
     @Test
     public void testCreateDriver(){
         Driver driver = new Driver();
-        driver.setName("Hamza");
         ResponseEntity<Driver> driverResponseEntity = testRestTemplate.postForEntity(getRootUrl() +"/driver",driver,Driver.class);
         assertNotNull(driverResponseEntity);
         assertNotNull(driverResponseEntity.getBody());
@@ -46,7 +45,6 @@ public class DriverControllerIntegrationTest {
     @Test
     public void updateDriver(){
         Driver driver = testRestTemplate.getForObject(getRootUrl()+"/driver/1",Driver.class);
-        driver.setName("Ertuğrul");
         testRestTemplate.put(getRootUrl()+"/driver/1",driver);
         Driver updatedDriver =testRestTemplate.getForObject(getRootUrl()+"/driver/1",Driver.class);
         assertNotNull(updatedDriver);
