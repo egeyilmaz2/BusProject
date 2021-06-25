@@ -41,9 +41,9 @@ public class BusAndDriverController {
     @PostMapping("/busAndDriver")
     public ResponseEntity AssignDriverBus(@Valid @RequestBody BusAndDriverDto busAndDriverDto){
         List<Bus> bus = new ArrayList<>() ;
-        bus.addAll( busRepository.findAllById(Collections.singleton(busAndDriverDto.getBus_id())));
+        bus.addAll( busRepository.findAllById(Collections.singleton(busAndDriverDto.getBusId())));
         List<Driver> driver=new ArrayList<>();
-        driver.addAll( driverRepository.findAllById(Collections.singleton(busAndDriverDto.getDriver_id())));
+        driver.addAll( driverRepository.findAllById(Collections.singleton(busAndDriverDto.getDriverId())));
         BusAndDriver busAndDriver= new BusAndDriver(bus.get(0),driver.get(0));
        try{
             busAndDriverRepository.save(busAndDriver);
@@ -51,6 +51,18 @@ public class BusAndDriverController {
                return (ResponseEntity) ResponseEntity.status(HttpStatus.BAD_REQUEST);
         }
         return  ResponseEntity.ok(HttpStatus.CREATED);
+    }
+    @GetMapping("/busAndDriver/{id}")
+    public ResponseEntity<BusAndDriverDto> getBusAndDriver(@PathVariable(value = "id") Long busAndDriverId){
+        BusAndDriver busAndDriver;
+        BusAndDriverDto busAndDriverDto;
+        try {
+            busAndDriver = busAndDriverRepository.getById(busAndDriverId);
+            busAndDriverDto = modelMapper.map(busAndDriver,BusAndDriverDto.class);
+        }catch(Exception e){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        return  ResponseEntity.ok().body(busAndDriverDto);
     }
     @GetMapping("/busAndDriver/findbus/{id}")
     public ResponseEntity<List<BusDto>> getBus(@PathVariable(value="id") Long driverId) {

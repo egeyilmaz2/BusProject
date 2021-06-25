@@ -32,7 +32,7 @@ public class DriverController {
             return (ResponseEntity<HttpStatus>) ResponseEntity.status(HttpStatus.BAD_REQUEST);
         }
 
-        return ResponseEntity.ok(HttpStatus.CREATED);
+        return ResponseEntity.ok().body(driver);
     }
 
     @PutMapping("/driver/{id}")

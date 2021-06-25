@@ -8,7 +8,7 @@ import lombok.Setter;
 @Setter
 public class BusAndDriverDto {
 
-    private Long bus_id;
-    private Long driver_id;
+    private Long busId;
+    private Long driverId;
 
 }

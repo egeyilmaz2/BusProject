@@ -26,13 +26,13 @@ public class BusController {
     RouteRepository routeRepository;
     ModelMapper modelMapper=new ModelMapper();
     @PostMapping("/bus")
-    public ResponseEntity insertBus(@Valid @RequestBody Bus bus) {//try-catch her biri için
+    public ResponseEntity<Bus> insertBus(@Valid @RequestBody Bus bus) {//try-catch her biri için
         try {
             busRepository.save(bus);
         } catch (Exception e) {
-            return (ResponseEntity<HttpStatus>) ResponseEntity.status(HttpStatus.BAD_REQUEST);
+            return (ResponseEntity<Bus>) ResponseEntity.status(HttpStatus.BAD_REQUEST);
         }
-        return ResponseEntity.ok(HttpStatus.CREATED);
+        return ResponseEntity.ok().body(bus);
     }
 
     @PostMapping("/bus/assignBusToRoute")

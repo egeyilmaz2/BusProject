@@ -2,6 +2,7 @@ package com.demo3.demo.model;
 
 import com.demo3.demo.dto.BusDto;
 import com.demo3.demo.repository.BusRepository;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import org.modelmapper.ModelMapper;
@@ -40,8 +41,5 @@ public class Bus implements Serializable {
    /* @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Route_id")
     private Route route;*/
-
-
-
 
 }
