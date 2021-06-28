@@ -31,7 +31,6 @@ class BusRepositoryTest {
     @Test
     public void testBusInsert() throws Exception{
         Bus bus = new Bus();
-        bus.setNo("1000");
         Bus testSavedBus= busRepository.save(bus);
         assertEquals(testSavedBus.getNo(),bus.getNo());
     }
@@ -39,7 +38,6 @@ class BusRepositoryTest {
     @Test
     public void testGetBus() throws Exception{
         Bus bus = new Bus();
-        bus.setNo("1000");
         busRepository.save(bus);
         Bus getBusTest = busRepository.getById(bus.getId());
         assertNotNull(getBusTest);
@@ -48,9 +46,7 @@ class BusRepositoryTest {
     @Test
     public void testBusFindAll() throws Exception{
         Bus bus1 = new Bus();
-        bus1.setNo("1000");
         Bus bus2 = new Bus();
-        bus1.setNo("1000");
         busRepository.save(bus1);
         busRepository.save(bus2);
         List<Bus> busList = busRepository.findAll();
@@ -59,7 +55,6 @@ class BusRepositoryTest {
     @Test
     public void testDeleteBus() throws  Exception{
         Bus bus = new Bus();
-        bus.setNo("1000");
         busRepository.save(bus);
         assertNotNull(bus);
         busRepository.deleteById(bus.getId());

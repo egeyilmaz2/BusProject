@@ -45,7 +45,15 @@ bootJar {
 						'Main-Class': 'com.demo3.demo.DemoApplication'
 				)
 			}
-		}
+		}/*
+jacocoTestReport{
+	reports{
+		html.enabled=true;
+		xml.enabled=true;
+		csv.enabled=true;
+
+	}
+}*/
 
 test {
 	useJUnitPlatform()

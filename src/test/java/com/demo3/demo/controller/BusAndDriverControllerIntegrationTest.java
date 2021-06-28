@@ -3,6 +3,7 @@ package com.demo3.demo.controller;
 import com.demo3.demo.DemoApplication;
 import com.demo3.demo.dto.BusAndDriverDto;
 import com.demo3.demo.dto.BusDto;
+import com.demo3.demo.dto.DriverDto;
 import com.demo3.demo.model.Bus;
 import com.demo3.demo.model.BusAndDriver;
 import com.demo3.demo.model.Driver;
@@ -51,11 +52,10 @@ public class BusAndDriverControllerIntegrationTest {
     }
     @Test
     public void testGetBusByDriverId(){
-       // assertNotNull(testRestTemplate.getForEntity(getRootUrl()+"/busAndDriver/findbus/1",busDtos,HttpStatus.OK));
+       assertNotNull(testRestTemplate.getForEntity(getRootUrl()+"/busAndDriver/findbus/1",BusDto.class));
     }
     @Test
     public void testGetDriverByBusId(){
-//        List<Driver> driver = new ArrayList<>();
-//        assertNotNull(testRestTemplate.getForEntity(getRootUrl()+"/busAndDriver/finddriver/1",driver.getClass()));
+     //   assertNotNull(testRestTemplate.getForEntity(getRootUrl()+"/busAndDriver/finddriver/1",DriverDto.class));
     }
 }
