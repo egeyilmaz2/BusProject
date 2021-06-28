@@ -56,6 +56,6 @@ public class BusAndDriverControllerIntegrationTest {
     }
     @Test
     public void testGetDriverByBusId(){
-     //   assertNotNull(testRestTemplate.getForEntity(getRootUrl()+"/busAndDriver/finddriver/1",DriverDto.class));
+       assertNotNull(testRestTemplate.getForEntity(getRootUrl()+"/busAndDriver/finddriver/1",DriverDto.class));
     }
 }

@@ -1,6 +1,5 @@
 package com.demo3.demo.controller;
 
-
 import com.demo3.demo.DemoApplication;
 import com.demo3.demo.model.BusAndDriver;
 import com.demo3.demo.model.Route;
@@ -31,7 +30,6 @@ public class StopControllerIntegrationTest {
         return "http://localhost:" + port;
     }
 
-
     @Test
     public void testCreateStop(){
         Stop stop = new Stop();
@@ -45,6 +43,7 @@ public class StopControllerIntegrationTest {
         Stop stop = testRestTemplate.getForObject(getRootUrl()+"/stop/1",Stop.class);
         assertNotNull(stop);
     }
+
     @Test
     public void updateStop(){
         Stop stop = testRestTemplate.getForObject(getRootUrl()+"/stop/1",Stop.class);
@@ -52,6 +51,7 @@ public class StopControllerIntegrationTest {
         Stop stopTest =testRestTemplate.getForObject(getRootUrl()+"/stop/1",Stop.class);
         assertNotNull(stopTest);
     }
+
     @Test
     public void testDeleteStop(){
         Stop stop = testRestTemplate.getForObject(getRootUrl()+"/stop/1",Stop.class);
