@@ -31,7 +31,8 @@ class StopRepositoryTest {
         List<Stop> stopList = new ArrayList<>();
         stopList.add(new Stop());
         stopList.add(new Stop());
-        List<Stop> testStopList = stopRepository.saveAll(stopList);
+        stopRepository.saveAll(stopList);
+        List<Stop> testStopList= stopRepository.findAll();
         assertEquals(stopList,testStopList);
     }
     @Test

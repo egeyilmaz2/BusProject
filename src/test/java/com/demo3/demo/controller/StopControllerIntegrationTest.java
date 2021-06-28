@@ -31,6 +31,7 @@ public class StopControllerIntegrationTest {
         return "http://localhost:" + port;
     }
 
+
     @Test
     public void testCreateStop(){
         Stop stop = new Stop();
@@ -38,6 +39,7 @@ public class StopControllerIntegrationTest {
         assertNotNull(stopResponseEntity);
         assertNotNull(stopResponseEntity.getBody());
     }
+
     @Test
     public void testGetStopById(){
         Stop stop = testRestTemplate.getForObject(getRootUrl()+"/stop/1",Stop.class);

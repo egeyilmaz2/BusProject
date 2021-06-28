@@ -2,6 +2,7 @@ plugins {
 	id 'org.springframework.boot' version '2.5.1'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
+
 }
 apply plugin: 'java'
 apply plugin: 'io.spring.dependency-management'
@@ -11,6 +12,7 @@ apply plugin: 'war'
 group = 'com.demo3'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
+
 
 repositories {
 	mavenCentral()
@@ -45,7 +47,10 @@ bootJar {
 						'Main-Class': 'com.demo3.demo.DemoApplication'
 				)
 			}
-		}/*
+		}
+
+
+/*
 jacocoTestReport{
 	reports{
 		html.enabled=true;

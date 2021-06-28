@@ -13,6 +13,7 @@ import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.client.HttpClientErrorException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -29,10 +30,11 @@ public class RouteControllerIntegrationTest {
         return "http://localhost:" + port;
     }
 
+
     @Test
     public void testCreateRoute(){
         Route route = new Route();
-        ResponseEntity routeResponseEntity= testRestTemplate.postForEntity(getRootUrl()+"/route",route, Route.class);;
+        ResponseEntity routeResponseEntity= testRestTemplate.postForEntity(getRootUrl()+"/route",route, Route.class);
         assertNotNull(routeResponseEntity);
         assertNotNull(routeResponseEntity.getBody());
     }

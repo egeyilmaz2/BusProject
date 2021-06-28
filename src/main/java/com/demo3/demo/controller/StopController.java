@@ -28,7 +28,6 @@ public class StopController {
         } catch (Exception e) {
             return (ResponseEntity<HttpStatus>) ResponseEntity.status(HttpStatus.BAD_REQUEST);
         }
-
         return ResponseEntity.ok(HttpStatus.CREATED);
     }
 

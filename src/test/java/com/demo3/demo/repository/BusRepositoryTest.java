@@ -17,8 +17,7 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 import static org.assertj.core.util.Arrays.asList;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
 
 @RunWith(SpringRunner.class)
@@ -58,5 +57,6 @@ class BusRepositoryTest {
         busRepository.save(bus);
         assertNotNull(bus);
         busRepository.deleteById(bus.getId());
+        assertFalse(busRepository.findById(bus.getId()).equals(bus));
     }
 }
