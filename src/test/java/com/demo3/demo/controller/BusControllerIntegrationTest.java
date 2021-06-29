@@ -59,12 +59,10 @@ public class BusControllerIntegrationTest {
     }
     @Test
     public void testDeleteBus(){
-        busRepository.save(new Bus());
-        Bus bus = testRestTemplate.getForObject(getRootUrl()+"/bus/1",Bus.class);
-        assertNotNull(bus);
-        testRestTemplate.delete(getRootUrl()+"/bus/1");
+        Bus bus = busRepository.save(new Bus());
+        testRestTemplate.delete(getRootUrl()+"/bus/"+bus.getId());
         try {
-            bus = testRestTemplate.getForObject(getRootUrl() + "/bus/1", Bus.class);
+            bus = testRestTemplate.getForObject(getRootUrl() + "/bus/"+bus.getId(), Bus.class);
         } catch (final HttpClientErrorException e) {
             assertEquals(e.getStatusCode(), HttpStatus.NOT_FOUND);
         }
