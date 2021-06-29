@@ -3,6 +3,7 @@ package com.demo3.demo.controller;
 import com.demo3.demo.DemoApplication;
 import com.demo3.demo.model.BusAndDriver;
 import com.demo3.demo.model.Route;
+import com.demo3.demo.repository.RouteRepository;
 import javafx.application.Application;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -29,7 +30,8 @@ public class RouteControllerIntegrationTest {
     private String getRootUrl(){
         return "http://localhost:" + port;
     }
-
+    @Autowired
+    RouteRepository routeRepository;
 
     @Test
     public void testCreateRoute(){
@@ -40,11 +42,13 @@ public class RouteControllerIntegrationTest {
     }
     @Test
     public void testGetRouteById(){
+        routeRepository.save(new Route());
         Route route = testRestTemplate.getForObject(getRootUrl()+"/route/1",Route.class);
         assertNotNull(route);
     }
     @Test
     public void updateRoute(){
+        routeRepository.save(new Route());
         Route route = testRestTemplate.getForObject(getRootUrl()+"/route/1",Route.class);
         testRestTemplate.put(getRootUrl()+"/route/1",route);
         Route routeTest =testRestTemplate.getForObject(getRootUrl()+"/route/1",Route.class);
@@ -52,6 +56,7 @@ public class RouteControllerIntegrationTest {
     }
     @Test
     public void testDeleteRoute(){
+        routeRepository.save(new Route());
         Route route = testRestTemplate.getForObject(getRootUrl()+"/route/1",Route.class);
         assertNotNull(route);
         testRestTemplate.delete(getRootUrl()+"/route/1");

@@ -2,6 +2,8 @@ package com.demo3.demo.controller;
 
 import com.demo3.demo.DemoApplication;
 import com.demo3.demo.model.*;
+import com.demo3.demo.repository.RouteAndStopRepository;
+import org.checkerframework.checker.units.qual.A;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +25,12 @@ public class RouteAndStopControllerIntegrationTest {
     private String getRootUrl(){
         return "http://localhost:" + port;
     }
+    @Autowired
+    RouteAndStopRepository routeAndStopRepository;
+
     @Test
     public void testCreateBusAndRoute(){
+        routeAndStopRepository.save(new RouteAndStop());
         RouteAndStop routeAndStop = new RouteAndStop(new Route(),new Stop());
         ResponseEntity RouteAndStopResponseEntity= testRestTemplate.postForEntity(getRootUrl()+"/routeAndStop",routeAndStop,RouteAndStop.class);
         assertNotNull(RouteAndStopResponseEntity);

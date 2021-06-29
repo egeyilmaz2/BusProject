@@ -3,6 +3,7 @@ package com.demo3.demo.controller;
 import com.demo3.demo.DemoApplication;
 import com.demo3.demo.model.Bus;
 import com.demo3.demo.model.Driver;
+import com.demo3.demo.repository.DriverRepository;
 import javafx.application.Application;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -28,6 +29,8 @@ public class DriverControllerIntegrationTest {
     private String getRootUrl(){
         return "http://localhost:" + port;
     }
+    @Autowired
+    DriverRepository driverRepository;
 
     @Test
     public void testCreateDriver(){
@@ -38,12 +41,13 @@ public class DriverControllerIntegrationTest {
     }
     @Test
     public void testGetDriverById(){
+        driverRepository.save(new Driver());
         Driver driver = testRestTemplate.getForObject(getRootUrl()+"/driver/1",Driver.class);
-        System.out.println(driver.getName());
         assertNotNull(driver);
     }
     @Test
     public void updateDriver(){
+        driverRepository.save(new Driver());
         Driver driver = testRestTemplate.getForObject(getRootUrl()+"/driver/1",Driver.class);
         testRestTemplate.put(getRootUrl()+"/driver/1",driver);
         Driver updatedDriver =testRestTemplate.getForObject(getRootUrl()+"/driver/1",Driver.class);
@@ -51,6 +55,7 @@ public class DriverControllerIntegrationTest {
     }
     @Test
     public void testDeleteDriver(){
+        driverRepository.save(new Driver());
         Driver driver = testRestTemplate.getForObject(getRootUrl()+"/driver/1",Driver.class);
         assertNotNull(driver);
         testRestTemplate.delete(getRootUrl()+"/driver/1");
