@@ -1,6 +1,7 @@
 package com.demo3.demo.controller;
 
 import com.demo3.demo.DemoApplication;
+import com.demo3.demo.dto.BusDto;
 import com.demo3.demo.model.Bus;
 import com.demo3.demo.repository.BusRepository;
 import javafx.application.Application;
@@ -45,16 +46,14 @@ public class BusControllerIntegrationTest {
     }
     @Test
     public void testGetBusById(){
-        busRepository.save(new Bus());
-        Bus bus = testRestTemplate.getForObject(getRootUrl()+"/bus/1",Bus.class);
-        assertNotNull(bus);
+        Bus bus = busRepository.save(new Bus());
+        assertNotNull(testRestTemplate.getForObject(getRootUrl()+"/bus/"+bus.getId(), BusDto.class));
     }
     @Test
     public void updateBus(){
-        busRepository.save(new Bus());
-        Bus bus= testRestTemplate.getForObject(getRootUrl()+"/bus/1",Bus.class);
-        bus.setNo("1001");
-        testRestTemplate.put(getRootUrl()+"/bus/1",bus);
+        Bus bus = busRepository.save(new Bus());
+        Bus busPut = busRepository.save(new Bus());
+        testRestTemplate.put(getRootUrl()+"/bus/"+bus.getId(),busPut);
         Bus updatedBus =testRestTemplate.getForObject(getRootUrl()+"/bus/1",Bus.class);
         assertNotNull(updatedBus);
     }

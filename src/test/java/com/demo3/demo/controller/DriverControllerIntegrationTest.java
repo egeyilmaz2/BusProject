@@ -1,6 +1,7 @@
 package com.demo3.demo.controller;
 
 import com.demo3.demo.DemoApplication;
+import com.demo3.demo.dto.DriverDto;
 import com.demo3.demo.model.Bus;
 import com.demo3.demo.model.Driver;
 import com.demo3.demo.repository.DriverRepository;
@@ -41,9 +42,8 @@ public class DriverControllerIntegrationTest {
     }
     @Test
     public void testGetDriverById(){
-        driverRepository.save(new Driver());
-        Driver driver = testRestTemplate.getForObject(getRootUrl()+"/driver/1",Driver.class);
-        assertNotNull(driver);
+        Driver driver =driverRepository.save(new Driver());
+        DriverDto driverDto= testRestTemplate.getForObject(getRootUrl()+"/driver/"+driver.getId(), DriverDto.class);
     }
     @Test
     public void updateDriver(){
@@ -55,12 +55,12 @@ public class DriverControllerIntegrationTest {
     }
     @Test
     public void testDeleteDriver(){
-        driverRepository.save(new Driver());
-        Driver driver = testRestTemplate.getForObject(getRootUrl()+"/driver/1",Driver.class);
+        Driver driverSave = driverRepository.save(new Driver());
+        Driver driver = testRestTemplate.getForObject(getRootUrl()+"/driver/"+driverSave.getId(),Driver.class);
         assertNotNull(driver);
-        testRestTemplate.delete(getRootUrl()+"/driver/1");
+        testRestTemplate.delete(getRootUrl()+"/driver/"+driver.getId());
         try {
-            driver = testRestTemplate.getForObject(getRootUrl() + "/driver/1", Driver.class);
+            driver = testRestTemplate.getForObject(getRootUrl() + "/driver/"+driver.getId(), Driver.class);
         } catch (final HttpClientErrorException e) {
             assertEquals(e.getStatusCode(), HttpStatus.NOT_FOUND);
         }
