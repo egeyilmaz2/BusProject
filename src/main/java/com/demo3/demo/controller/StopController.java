@@ -22,13 +22,14 @@ public class StopController {
     StopRepository stopRepository;
     ModelMapper modelMapper=new ModelMapper();
     @PostMapping("/stop")
-    public ResponseEntity insertStop(@Valid @RequestBody Stop stop) {//try-catch her biri için
+    public ResponseEntity<StopDto> insertStop(@Valid @RequestBody Stop stop) {//try-catch her biri için
+        StopDto stopDto;
         try {
-            stopRepository.save(stop);
+            stopDto = modelMapper.map(stopRepository.save(stop),StopDto.class);
         } catch (Exception e) {
-            return (ResponseEntity<HttpStatus>) ResponseEntity.status(HttpStatus.BAD_REQUEST);
+            return (ResponseEntity<StopDto>) ResponseEntity.status(HttpStatus.BAD_REQUEST);
         }
-        return ResponseEntity.ok(HttpStatus.CREATED);
+        return ResponseEntity.ok().body(stopDto);
     }
 
     @PutMapping("/stop/{id}")

@@ -34,13 +34,13 @@ public class StopControllerIntegrationTest {
     @Autowired
     StopRepository stopRepository;
 
-   /* @Test
+    @Test
     public void testCreateStop(){
         Stop stop = new Stop();
         ResponseEntity stopResponseEntity= testRestTemplate.postForEntity(getRootUrl()+"/stop",stop, Stop.class);
         assertNotNull(stopResponseEntity);
         assertNotNull(stopResponseEntity.getBody());
-    }*/
+    }
 
     @Test
     public void testGetStopById(){
@@ -61,10 +61,10 @@ public class StopControllerIntegrationTest {
     @Test
     public void testDeleteStop(){
         Stop stop = stopRepository.save(new Stop());
-        assertNotNull(testRestTemplate.getForObject(getRootUrl()+"/stop/1", StopDto.class));
-        testRestTemplate.delete(getRootUrl()+"/stop/1");
+        assertNotNull(testRestTemplate.getForObject(getRootUrl()+"/stop/"+stop.getId(), StopDto.class));
+        testRestTemplate.delete(getRootUrl()+"/stop/"+stop.getId());
         try {
-            stop = testRestTemplate.getForObject(getRootUrl() + "/stop/1", Stop.class);
+            stop = testRestTemplate.getForObject(getRootUrl() + "/stop/"+stop.getId(), Stop.class);
         } catch (final HttpClientErrorException e) {
             assertEquals(e.getStatusCode(), HttpStatus.NOT_FOUND);
         }
