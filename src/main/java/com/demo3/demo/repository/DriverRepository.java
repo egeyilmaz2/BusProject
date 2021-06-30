@@ -7,7 +7,6 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 
 @Repository("DriverRepository")
-
 public interface DriverRepository extends JpaRepository<Driver,Long> , JpaSpecificationExecutor<Order> {
 
 }

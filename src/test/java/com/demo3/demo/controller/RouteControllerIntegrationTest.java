@@ -1,6 +1,8 @@
 package com.demo3.demo.controller;
 
 import com.demo3.demo.DemoApplication;
+import com.demo3.demo.dto.RouteDto;
+import com.demo3.demo.model.Bus;
 import com.demo3.demo.model.BusAndDriver;
 import com.demo3.demo.model.Route;
 import com.demo3.demo.repository.RouteRepository;
@@ -36,9 +38,8 @@ public class RouteControllerIntegrationTest {
     @Test
     public void testCreateRoute(){
         Route route = new Route();
-        ResponseEntity routeResponseEntity= testRestTemplate.postForEntity(getRootUrl()+"/route",route, Route.class);
-        assertNotNull(routeResponseEntity);
-        assertNotNull(routeResponseEntity.getBody());
+        ResponseEntity<RouteDto> routeDtoResponseEntity= testRestTemplate.postForEntity(getRootUrl()+"/route",route, RouteDto.class);
+        assertNotNull(routeDtoResponseEntity);
     }
     @Test
     public void testGetRouteById(){

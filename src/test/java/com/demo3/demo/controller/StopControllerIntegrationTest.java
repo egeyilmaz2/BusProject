@@ -1,6 +1,7 @@
 package com.demo3.demo.controller;
 
 import com.demo3.demo.DemoApplication;
+import com.demo3.demo.dto.StopDto;
 import com.demo3.demo.model.BusAndDriver;
 import com.demo3.demo.model.Route;
 import com.demo3.demo.model.Stop;
@@ -59,9 +60,8 @@ public class StopControllerIntegrationTest {
 
     @Test
     public void testDeleteStop(){
-        stopRepository.save(new Stop());
-        Stop stop = testRestTemplate.getForObject(getRootUrl()+"/stop/1",Stop.class);
-        assertNotNull(stop);
+        Stop stop = stopRepository.save(new Stop());
+        assertNotNull(testRestTemplate.getForObject(getRootUrl()+"/stop/1", StopDto.class));
         testRestTemplate.delete(getRootUrl()+"/stop/1");
         try {
             stop = testRestTemplate.getForObject(getRootUrl() + "/stop/1", Stop.class);

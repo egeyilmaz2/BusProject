@@ -49,7 +49,7 @@ public class DriverController {
     }
 
     @GetMapping("/driver/{id}")
-    public ResponseEntity getDriverById(@PathVariable(value="id") Long driverId) {
+    public ResponseEntity<DriverDto> getDriverById(@PathVariable(value="id") Long driverId) {
         DriverDto driverDto;
         try {
             driverDto =  modelMapper.map(driverRepository.getById(driverId),DriverDto.class);

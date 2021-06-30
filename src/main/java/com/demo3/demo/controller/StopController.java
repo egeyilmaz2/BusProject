@@ -45,7 +45,7 @@ public class StopController {
     }
 
     @GetMapping("/stop/{id}")
-    public ResponseEntity getStopById(@PathVariable(value="id") Long stopId) {
+    public ResponseEntity<StopDto> getStopById(@PathVariable(value="id") Long stopId) {
         StopDto stopDto;
         try {
             stopDto =  modelMapper.map(stopRepository.getById(stopId),StopDto.class);

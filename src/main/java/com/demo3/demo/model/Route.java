@@ -18,7 +18,7 @@ public class Route implements Serializable {
     @GeneratedValue(generator = "route_seq", strategy = GenerationType.SEQUENCE)
     private long id;
 
-    @Column(columnDefinition = "name")
+    @Column(name = "name")
     private String name;
 
     @OneToMany(mappedBy = "route")

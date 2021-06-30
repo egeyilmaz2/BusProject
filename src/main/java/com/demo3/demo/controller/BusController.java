@@ -59,7 +59,7 @@ public class BusController {
     }
 
     @GetMapping("/bus/{id}")
-    public ResponseEntity getBusById(@PathVariable(value="id") Long busId) {
+    public ResponseEntity<BusDto> getBusById(@PathVariable(value="id") Long busId) {
         BusDto busDto;
         try {
            busDto = modelMapper.map(busRepository.getById(busId),BusDto.class);

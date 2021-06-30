@@ -22,14 +22,15 @@ public class RouteController {
     RouteRepository routeRepository;
     ModelMapper modelMapper=new ModelMapper();
     @PostMapping("/route")
-    public ResponseEntity insertRoute(@Valid @RequestBody Route route) {//try-catch her biri için
+    public ResponseEntity<RouteDto> insertRoute(@Valid @RequestBody Route route) {//try-catch her biri için
+        RouteDto routeDto;
         try {
-            routeRepository.save(route);
+            routeDto = modelMapper.map(routeRepository.save(route),RouteDto.class);
         } catch (Exception e) {
-            return (ResponseEntity<HttpStatus>) ResponseEntity.status(HttpStatus.BAD_REQUEST);
+            return (ResponseEntity<RouteDto>) ResponseEntity.status(HttpStatus.BAD_REQUEST);
         }
 
-        return ResponseEntity.ok(HttpStatus.CREATED);
+        return ResponseEntity.ok().body(routeDto);
     }
 
     @PutMapping("/route/{id}")
