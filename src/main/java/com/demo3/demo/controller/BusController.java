@@ -36,14 +36,14 @@ public class BusController {
     }
 
     @PostMapping("/bus/assignBusToRoute")
-    public ResponseEntity AssingBusToRoute(@Valid @RequestBody BusAndRouteDto busAndRouteDto) {
+    public ResponseEntity<BusAndRouteDto> AssingBusToRoute(@Valid @RequestBody BusAndRouteDto busAndRouteDto) {
         try {
             BusAndRoute busAndRoute= new BusAndRoute(busRepository.getById(busAndRouteDto.getBusId()),routeRepository.getById(busAndRouteDto.getRouteId()));
             busAndRouteRepository.save(busAndRoute);
         } catch (Exception e) {
-            return (ResponseEntity<HttpStatus>) ResponseEntity.status(HttpStatus.BAD_REQUEST);
+            return (ResponseEntity<BusAndRouteDto>) ResponseEntity.status(HttpStatus.BAD_REQUEST);
         }
-        return ResponseEntity.ok("ASSIGN ACTION "+HttpStatus.OK);
+        return ResponseEntity.ok().body(busAndRouteDto);
     }
     @PutMapping("/bus/{id}")
     public ResponseEntity updateBus(@PathVariable(value = "id") Long BusId,@Valid @RequestBody Bus busDetails) {

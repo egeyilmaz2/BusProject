@@ -8,6 +8,8 @@ import com.demo3.demo.model.Bus;
 import com.demo3.demo.model.BusAndDriver;
 import com.demo3.demo.model.Driver;
 import com.demo3.demo.repository.BusAndDriverRepository;
+import com.demo3.demo.repository.BusRepository;
+import com.demo3.demo.repository.DriverRepository;
 import javafx.application.Application;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -39,11 +41,15 @@ public class BusAndDriverControllerIntegrationTest {
     }
     @Autowired
     BusAndDriverRepository busAndDriverRepository;
+    @Autowired
+    BusRepository busRepository;
+    @Autowired
+    DriverRepository driverRepository;
 
     @Test
     public void testCreateBusAndDriver(){
-        Bus bus = new Bus();
-        Driver driver = new Driver();
+        Bus bus = busRepository.save(new Bus());
+        Driver driver = driverRepository.save(new Driver());
         BusAndDriver busAndDriver = new BusAndDriver(bus,driver);
         ResponseEntity busAndDriverResponseEntity= testRestTemplate.postForEntity(getRootUrl()+"/busAndDriver",busAndDriver,BusAndDriver.class);
         assertNotNull(busAndDriverResponseEntity);
@@ -52,16 +58,22 @@ public class BusAndDriverControllerIntegrationTest {
 
     @Test
     public void testGetBusAndDriver(){
-        busAndDriverRepository.save(new BusAndDriver());
-        assertNotNull(testRestTemplate.getForEntity(getRootUrl()+"/busAndDriver/1",BusAndDriverDto.class));
+        BusAndDriver busAndDriver = busAndDriverRepository.save(new BusAndDriver());
+        assertNotNull(testRestTemplate.getForEntity(getRootUrl()+"/busAndDriver/"+busAndDriver.getId(),BusAndDriverDto.class));
     }
 
     @Test
     public void testGetBusByDriverId(){
-      // assertNotNull(testRestTemplate.getForEntity(getRootUrl()+"/busAndDriver/findbus/1",BusDto.class));
+        List<BusDto> busDtos = new ArrayList<>();
+        Driver driver = driverRepository.save(new Driver());
+        BusAndDriver busAndDriver = busAndDriverRepository.save(new BusAndDriver(busRepository.save(new Bus()),driver));
+        assertNotNull(testRestTemplate.getForEntity(getRootUrl()+"/busAndDriver/findbus/"+driver.getId(),busDtos.getClass()));
     }
     @Test
     public void testGetDriverByBusId(){
-      // assertNotNull(testRestTemplate.getForEntity(getRootUrl()+"/busAndDriver/finddriver/1",DriverDto.class));
+        List<DriverDto> driverDtos = new ArrayList<>();
+        Bus bus = busRepository.save(new Bus());
+        BusAndDriver busAndDriver = busAndDriverRepository.save(new BusAndDriver(bus,driverRepository.save(new Driver())));
+        assertNotNull(testRestTemplate.getForEntity(getRootUrl()+"/busAndDriver/finddriver/"+bus.getId(),driverDtos.getClass()));
     }
 }

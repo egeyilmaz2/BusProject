@@ -74,7 +74,7 @@ public class BusAndDriverController {
             busDto.add(modelMapper.map(busListIterator.next(),  BusDto.class));
         }
         System.out.println();
-        return new ResponseEntity<>(busDto,HttpStatus.OK);
+        return  ResponseEntity.ok().body(busDto);
     }
     @GetMapping("/busAndDriver/finddriver/{id}")
     public ResponseEntity<List<DriverDto>> getDriver(@PathVariable(value="id") Long busId){
@@ -86,6 +86,6 @@ public class BusAndDriverController {
             driverDto.add(modelMapper.map(driverListIterator.next(),  DriverDto.class));
         }
         System.out.println();
-        return new ResponseEntity<>(driverDto,HttpStatus.OK);
+        return ResponseEntity.ok().body(driverDto);
     }
 }
