@@ -10,7 +10,6 @@ import com.demo3.demo.model.Driver;
 import com.demo3.demo.repository.BusAndDriverRepository;
 import com.demo3.demo.repository.BusRepository;
 import com.demo3.demo.repository.DriverRepository;
-import javafx.application.Application;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

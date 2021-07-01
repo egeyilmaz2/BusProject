@@ -6,7 +6,7 @@ import com.demo3.demo.model.BusAndDriver;
 import com.demo3.demo.model.Route;
 import com.demo3.demo.model.Stop;
 import com.demo3.demo.repository.StopRepository;
-import javafx.application.Application;
+
 import org.checkerframework.checker.initialization.qual.Initialized;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;

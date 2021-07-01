@@ -6,7 +6,7 @@ import com.demo3.demo.model.Bus;
 import com.demo3.demo.model.BusAndDriver;
 import com.demo3.demo.model.Route;
 import com.demo3.demo.repository.RouteRepository;
-import javafx.application.Application;
+
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
