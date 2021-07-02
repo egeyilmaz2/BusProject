@@ -34,16 +34,16 @@ public class RouteController {
     }
 
     @PutMapping("/route/{id}")
-    public ResponseEntity updateRoute(@PathVariable(value = "id") Long routeId, @Valid @RequestBody Route routeDetails) {
+    public ResponseEntity<RouteDto> updateRoute(@PathVariable(value = "id") Long routeId, @Valid @RequestBody Route routeDetails) {
         Route route;
         try {
             route = routeRepository.getById(routeId);
             route.setName(routeDetails.getName());
         } catch (Exception e) {
-            return (ResponseEntity<HttpStatus>) ResponseEntity.status(HttpStatus.BAD_REQUEST);
+            return (ResponseEntity<RouteDto>) ResponseEntity.status(HttpStatus.BAD_REQUEST);
         }
         routeRepository.save(route);
-        return ResponseEntity.ok("UPDATE "+HttpStatus.OK);
+        return ResponseEntity.ok().body(modelMapper.map(route,RouteDto.class));
     }
 
     @GetMapping("/route/{id}")

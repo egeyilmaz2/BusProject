@@ -27,6 +27,7 @@ class RouteAndStopRepositoryTest {
     public void testRouteAndSTopSave() throws Exception{
         RouteAndStop routeAndStop = new RouteAndStop(new Route(),new Stop());
         RouteAndStop testSave = routeAndStopRepository.save(routeAndStop);
+        assertNotNull(testSave);
         assertEquals(routeAndStop.getId(),testSave.getId());
     }
 

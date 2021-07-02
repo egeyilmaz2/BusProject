@@ -1,6 +1,7 @@
 package com.demo3.demo.controller;
 
 import com.demo3.demo.DemoApplication;
+import com.demo3.demo.dto.BusAndRouteDto;
 import com.demo3.demo.model.*;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -25,8 +26,7 @@ public class BusAndRouteControllerIntegrationTest {
     }
     @Test
     public void testCreateBusAndRoute(){
-        BusAndRoute busAndRoute = new BusAndRoute(new Bus(),new Route());
-        ResponseEntity busAndRouteResponseEntity= testRestTemplate.postForEntity(getRootUrl()+"/busAndRoute",busAndRoute,BusAndRoute.class);
+        ResponseEntity busAndRouteResponseEntity= testRestTemplate.postForEntity(getRootUrl()+"/busAndRoute",new BusAndRouteDto(), BusAndRouteDto.class);
         assertNotNull(busAndRouteResponseEntity);
         assertNotNull(busAndRouteResponseEntity.getBody());
     }

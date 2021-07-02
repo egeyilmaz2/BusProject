@@ -28,7 +28,7 @@ public class BusAndRouteController {
     ModelMapper modelMapper = new ModelMapper();
 
     @PostMapping("/busAndRoute")
-    public ResponseEntity AssignRouteToBus(@Valid @RequestBody BusAndRouteDto busAndRouteDto){
+    public ResponseEntity<BusAndRouteDto> AssignRouteToBus(@Valid @RequestBody BusAndRouteDto busAndRouteDto){
         List<Bus> bus = busRepository.findAllById(Collections.singleton(busAndRouteDto.getBusId()));
         List<Route> route= routeRepository.findAllById(Collections.singleton(busAndRouteDto.getRouteId()));
         BusAndRoute busAndRoute= new BusAndRoute(bus.get(0),route.get(0));
@@ -37,6 +37,6 @@ public class BusAndRouteController {
         }catch(Exception e){
             return (ResponseEntity) ResponseEntity.status(HttpStatus.BAD_REQUEST);
         }
-        return  ResponseEntity.ok(HttpStatus.CREATED);
+        return  ResponseEntity.ok().body(busAndRouteDto);
     }
 }

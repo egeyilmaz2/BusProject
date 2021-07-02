@@ -49,11 +49,9 @@ public class RouteControllerIntegrationTest {
     }
     @Test
     public void updateRoute(){
-        routeRepository.save(new Route());
-        Route route = testRestTemplate.getForObject(getRootUrl()+"/route/1",Route.class);
-        testRestTemplate.put(getRootUrl()+"/route/1",route);
-        Route routeTest =testRestTemplate.getForObject(getRootUrl()+"/route/1",Route.class);
-        assertNotNull(routeTest);
+        Route route = routeRepository.save(new Route());
+        testRestTemplate.put(getRootUrl() + "/route/" + route.getId(), new Route());
+        assertNotNull(routeRepository.getById(route.getId()));
     }
     @Test
     public void testDeleteRoute(){

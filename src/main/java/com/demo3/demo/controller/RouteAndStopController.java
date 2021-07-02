@@ -26,7 +26,7 @@ public class RouteAndStopController {
     ModelMapper modelMapper = new ModelMapper();
 
     @PostMapping("/routeAndStop")
-    public ResponseEntity AssignStopToRoute(@Valid @RequestBody RouteAndStopDto routeAndStopDto){
+    public ResponseEntity<RouteAndStopDto> AssignStopToRoute(@Valid @RequestBody RouteAndStopDto routeAndStopDto){
         List<Route> route = routeRepository.findAllById(Collections.singleton(routeAndStopDto.getRouteId()));
         List<Stop> stop= stopRepository.findAllById(Collections.singleton(routeAndStopDto.getStopId()));
         RouteAndStop routeAndStop= new RouteAndStop(route.get(0),stop.get(0));
@@ -35,7 +35,7 @@ public class RouteAndStopController {
         }catch(Exception e){
             return (ResponseEntity) ResponseEntity.status(HttpStatus.BAD_REQUEST);
         }
-        return  ResponseEntity.ok(HttpStatus.CREATED);
+        return  ResponseEntity.ok().body(routeAndStopDto);
     }
    /* @GetMapping("/routeAndStop/findroute/{id}")
     public ResponseEntity<List<RouteDto>> getRoute(@PathVariable(value="id") Long stopId) {

@@ -1,6 +1,7 @@
 package com.demo3.demo.controller;
 
 import com.demo3.demo.DemoApplication;
+import com.demo3.demo.dto.RouteAndStopDto;
 import com.demo3.demo.model.*;
 import com.demo3.demo.repository.RouteAndStopRepository;
 import org.checkerframework.checker.units.qual.A;
@@ -30,9 +31,7 @@ public class RouteAndStopControllerIntegrationTest {
 
     @Test
     public void testCreateBusAndRoute(){
-        routeAndStopRepository.save(new RouteAndStop());
-        RouteAndStop routeAndStop = new RouteAndStop(new Route(),new Stop());
-        ResponseEntity RouteAndStopResponseEntity= testRestTemplate.postForEntity(getRootUrl()+"/routeAndStop",routeAndStop,RouteAndStop.class);
+        ResponseEntity RouteAndStopResponseEntity= testRestTemplate.postForEntity(getRootUrl()+"/routeAndStop",new RouteAndStopDto(),RouteAndStopDto.class);
         assertNotNull(RouteAndStopResponseEntity);
         assertNotNull(RouteAndStopResponseEntity.getBody());
     }

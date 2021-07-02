@@ -39,7 +39,7 @@ public class BusAndDriverController {
     ModelMapper modelMapper = new ModelMapper();
 
     @PostMapping("/busAndDriver")
-    public ResponseEntity AssignDriverBus(@Valid @RequestBody BusAndDriverDto busAndDriverDto){
+    public ResponseEntity<BusAndDriverDto> AssignDriverBus(@Valid @RequestBody BusAndDriverDto busAndDriverDto){
         List<Bus> bus = new ArrayList<>() ;
         bus.addAll( busRepository.findAllById(Collections.singleton(busAndDriverDto.getBusId())));
         List<Driver> driver=new ArrayList<>();
@@ -50,7 +50,7 @@ public class BusAndDriverController {
         }catch(Exception e){
                return (ResponseEntity) ResponseEntity.status(HttpStatus.BAD_REQUEST);
         }
-        return  ResponseEntity.ok(HttpStatus.CREATED);
+        return  ResponseEntity.ok().body(modelMapper.map(busAndDriver,BusAndDriverDto.class));
     }
     @GetMapping("/busAndDriver/{id}")
     public ResponseEntity<BusAndDriverDto> getBusAndDriver(@PathVariable(value = "id") Long busAndDriverId){

@@ -47,12 +47,7 @@ public class BusAndDriverControllerIntegrationTest {
 
     @Test
     public void testCreateBusAndDriver(){
-        Bus bus = busRepository.save(new Bus());
-        Driver driver = driverRepository.save(new Driver());
-        BusAndDriver busAndDriver = new BusAndDriver(bus,driver);
-        ResponseEntity busAndDriverResponseEntity= testRestTemplate.postForEntity(getRootUrl()+"/busAndDriver",busAndDriver,BusAndDriver.class);
-        assertNotNull(busAndDriverResponseEntity);
-        assertNotNull(busAndDriverResponseEntity.getBody());
+        assertNotNull(testRestTemplate.postForEntity(getRootUrl()+"/busAndDriver",new BusAndDriverDto(),BusAndDriverDto.class));
     }
 
     @Test
